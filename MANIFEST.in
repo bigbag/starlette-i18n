@@ -1,0 +1,8 @@
+include MANIFEST.in
+include README.md
+include setup.py
+
+recursive-include starlette_i18n *.py
+recursive-exclude tests *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
