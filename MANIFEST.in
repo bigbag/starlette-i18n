@@ -1,6 +1,4 @@
-include MANIFEST.in
-include README.md
-include setup.py
+include LICENSE README.rst MANIFEST.in setup.py
 
 recursive-include starlette_i18n *.py
 recursive-exclude tests *
