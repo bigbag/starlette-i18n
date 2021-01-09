@@ -4,7 +4,7 @@ from importlib.machinery import SourceFileLoader
 
 from setuptools import find_packages, setup
 
-version = SourceFileLoader("version", "starlette-i18n/version.py").load_module()
+version = SourceFileLoader("version", "starlette_i18n/version.py").load_module()
 
 
 _ROOT = pathlib.Path(__file__).parent
