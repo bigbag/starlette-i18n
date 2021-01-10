@@ -5,17 +5,18 @@ from starlette.testclient import TestClient
 
 from starlette_i18n import LocaleMiddleware, load_gettext_translations
 
-from . import messages
-
-BABEL_DOMAIN = "messages"
-BABEL_LOCALES_PATH = "tests/locales"
+from . import constants, messages
 
 
 @pytest.fixture()
-def app():
+def load_translations():
+    load_gettext_translations(directory=constants.BABEL_LOCALES_PATH, domain=constants.BABEL_DOMAIN)
+
+
+@pytest.fixture()
+def app(load_translations):
     app_ = Starlette()
     app_.add_middleware(LocaleMiddleware, language_header="Accept-Language", default_code="en")
-    load_gettext_translations(directory=BABEL_LOCALES_PATH, domain=BABEL_DOMAIN)
 
     @app_.route("/success/")
     def success(request):
