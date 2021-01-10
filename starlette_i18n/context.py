@@ -15,7 +15,3 @@ class ContextStorage:
 
     def set(self, value: Any):
         self._token_id = self._values.set(value)
-
-    def reset(self):
-        if self._token_id:
-            self._values.reset(self._token_id)
