@@ -32,6 +32,7 @@ Basic Usage
         LocaleMiddleware,
         load_gettext_translations,
     )
+    from starlette_i18n import gettext_lazy as _
 
     BABEL_DOMAIN = "messages"
     BABEL_LOCALES_PATH = "locales"
@@ -47,7 +48,7 @@ Basic Usage
 
         @app_.route("/")
         def success(request):
-            return PlainTextResponse("OK", status_code=200)
+            return PlainTextResponse(_("OK"), status_code=200)
 
         return app_
 
