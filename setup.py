@@ -9,7 +9,7 @@ version = SourceFileLoader("version", "starlette_i18n/version.py").load_module()
 
 _ROOT = pathlib.Path(__file__).parent
 
-with open(str(_ROOT / "README.rst")) as f:
+with open(str(_ROOT / "README.md")) as f:
     readme = f.read()
 
 CLASSIFIERS = [
