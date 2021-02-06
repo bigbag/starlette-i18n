@@ -59,8 +59,8 @@ if __name__ == "__main__":
 
 ## License
 
-sqlalchemy-state-machine is developed and distributed under the Apache 2.0 license.
+starlette-i18n is developed and distributed under the Apache 2.0 license.
 
 ## Reporting a Security Vulnerability
 
-See our [security policy](https://github.com/bigbag/sqlalchemy-state-machine/security/policy).
+See our [security policy](https://github.com/bigbag/starlette-i18n/security/policy).
