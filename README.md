@@ -1,6 +1,7 @@
 # starlette-i18n
 
 [![CI](https://github.com/bigbag/starlette-i18n/workflows/CI/badge.svg)](https://github.com/bigbag/starlette-i18n/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/bigbag/starlette-i18nsqlalchemy-state-machine/branch/main/graph/badge.svg)](https://codecov.io/gh/bigbag/sqlalchemy-state-machine) 
 [![pypi](https://img.shields.io/pypi/v/starlette-i18n.svg)](https://pypi.python.org/pypi/starlette-i18n)
 [![downloads](https://img.shields.io/pypi/dm/starlette-i18n.svg)](https://pypistats.org/packages/starlette-i18n)
 [![versions](https://img.shields.io/pypi/pyversions/starlette-i18n.svg)](https://github.com/bigbag/starlette-i18n)
