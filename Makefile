@@ -13,13 +13,13 @@ check:
 	@echo "Run isort"
 	@exec isort --check-only .
 	@echo "Run black"
-	@exec black --check --diff sqlalchemy_state_machine tests
+	@exec black --check --diff starlette_i18n tests
 	@echo "Run flake"
-	@exec flake8 sqlalchemy_state_machine tests
+	@exec flake8 starlette_i18n tests
 	@echo "Run bandit"
-	@exec bandit -r sqlalchemy_state_machine/*
+	@exec bandit -r starlette_i18n/*
 	@echo "Run mypy"
-	@exec mypy sqlalchemy_state_machine
+	@exec mypy starlette_i18n
 	@exec rm -rf .mypy_cache
 
 .PHONY: lint
