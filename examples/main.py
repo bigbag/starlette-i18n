@@ -6,7 +6,8 @@ from starlette.routing import Route
 
 from starlette_i18n import LocaleMiddleware, get_locale, load_gettext_translations
 
-from constants import BABEL_DOMAIN, BABEL_LOCALES_PATH
+BABEL_DOMAIN = "messages"
+BABEL_LOCALES_PATH = "locales"
 
 
 def get_jinja_environment() -> Environment:
