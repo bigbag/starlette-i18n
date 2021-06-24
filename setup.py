@@ -41,7 +41,7 @@ setup(
     platforms=["POSIX"],
     classifiers=CLASSIFIERS,
     python_requires=">=3.7",
-    install_requires=["starlette==0.14.2", "babel==2.9.1"],
+    install_requires=["starlette==0.15.0", "babel==2.9.1"],
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
