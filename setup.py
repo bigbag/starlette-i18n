@@ -42,7 +42,7 @@ setup(
     classifiers=CLASSIFIERS,
     python_requires=">=3.7",
     install_requires=[
-        "starlette>=0.14.2",
+        "starlette>=0.15.0",
         "babel>=2.9.1",
         "python-multipart"
     ],
