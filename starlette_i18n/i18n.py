@@ -3,7 +3,6 @@ from __future__ import annotations
 import typing as t
 
 from babel.support import LazyProxy
-from starlette.datastructures import Headers
 
 from . import constants
 from .context import ContextStorage
@@ -49,10 +48,6 @@ def _lookup_func(
 
 
 gettext_lazy = _make_lazy_gettext(_lookup_func)
-
-
-def _get_code_from_headers(headers: Headers, language_header: str, default_code: str) -> str:
-    return str(headers.get(language_header, default_code))
 
 
 def load_gettext_translations(directory: str, domain: str) -> None:

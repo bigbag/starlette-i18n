@@ -20,6 +20,8 @@ Use pip to install:
 
 ## Basic Usage
 
+### Automatic language recognition
+
 ```py
 import uvicorn
 from starlette.applications import Starlette
@@ -48,6 +50,58 @@ def init_app():
     @app_.route("/")
     def success(request):
         return PlainTextResponse(_("OK"), status_code=200)
+
+    return app_
+
+
+app = init_app()
+
+if __name__ == "__main__":
+    uvicorn.run(app=app)
+```
+
+### Language cookie and language selector use
+
+```py
+import uvicorn
+from starlette.applications import Starlette
+from starlette.middleware import Middleware
+from starlette.responses import PlainTextResponse
+from starlette.routing import Route
+
+from starlette_i18n import (
+    DEFAULT_LOCALE,
+    LANGUAGE_HEADER,
+    LocaleAutodetectMiddleware,
+    LocaleDefaultMiddleware,
+    LocaleFromCookieMiddleware,
+    load_gettext_translations,
+)
+from starlette_i18n.view import SetLocale
+from starlette_i18n import gettext_lazy as _
+
+BABEL_DOMAIN = "messages"
+BABEL_LOCALES_PATH = "locales"
+
+
+def init_app():
+    load_gettext_translations(directory=BABEL_LOCALES_PATH, domain=BABEL_DOMAIN)
+
+    app_ = Starlette(
+        middleware=[
+            Middleware(LocaleDefaultMiddleware, default_code="en"),
+            Middleware(
+                LocaleAutodetectMiddleware,
+                language_header="Accept-Language",
+                default_code=None,
+            ),
+            Middleware(LocaleFromCookieMiddleware, language_cookie="Language"),
+        ],
+        routes=[
+            Route("/success/", endpoint=success),
+            Route("/lang/", endpoint=view.SetLocale(language_cookie="Language", redirect=False), methods=["GET", "POST"])
+        ],
+    )
 
     return app_
 

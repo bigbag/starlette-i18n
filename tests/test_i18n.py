@@ -4,7 +4,7 @@ from starlette_i18n.i18n import _language_ctx, get_locale_code, set_locale
 from starlette_i18n.locale import Locale
 
 
-def test_ctx_locale():
+def test_ctx_locale(load_translations):
     assert isinstance(_language_ctx.get(), Locale)
 
 
@@ -16,6 +16,11 @@ def test_ctx_locale_language():
 def test_set_locale_if_support_locale(load_translations):
     set_locale("ru")
     assert get_locale_code() == "ru"
+
+
+def test_set_locale_extended(load_translations):
+    set_locale("uk_UA")
+    assert get_locale_code() == "uk_UA"
 
 
 def test_set_locale_if_not_support_locale(load_translations):

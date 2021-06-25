@@ -14,7 +14,7 @@ LOCALE_DIRECTORY = TESTS_DIR / "locales"
 @mock.patch("starlette_i18n.locale.Translations.load")
 def test_locale_load_file_count(mock_translations_load):
     gettext_translations.load_translations(LOCALE_DIRECTORY, constants.BABEL_DOMAIN)
-    assert mock_translations_load.call_count == 2
+    assert mock_translations_load.call_count == 3
 
 
 @mock.patch("starlette_i18n.locale.Translations.load")
