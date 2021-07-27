@@ -62,7 +62,7 @@ def _parse_accept_language(value: str) -> t.List[t.Tuple[str, str]]:
             accepted_languages.append((language, "1"))
         else:
             _, weight = parts[1].strip().split("=")
-            accepted_languages.append((parts[0].strip(), weight))
+            accepted_languages.append((parts[0].strip().replace("-", "_"), weight))
 
     return accepted_languages
 
