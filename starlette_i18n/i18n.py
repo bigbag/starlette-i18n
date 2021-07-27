@@ -51,8 +51,29 @@ def _lookup_func(
 gettext_lazy = _make_lazy_gettext(_lookup_func)
 
 
+def _parse_accept_language(value: str) -> t.List[t.Tuple[str, str]]:
+    accepted_languages = []
+    languages = value.split(",")
+    for language in languages:
+        language = language.strip()
+        parts = language.split(";")
+        # there is no weight associated to the language
+        if parts[0] == language:
+            accepted_languages.append((language, "1"))
+        else:
+            _, weight = parts[1].strip().split("=")
+            accepted_languages.append((parts[0].strip(), weight))
+
+    return accepted_languages
+
+
 def _get_code_from_headers(headers: Headers, language_header: str, default_code: str) -> str:
-    return str(headers.get(language_header, default_code))
+    if language_header.lower() == "accept-language":
+        for code, _ in _parse_accept_language(headers.get(language_header, default_code)):
+            if code in gettext_translations.supported_locales:
+                return code
+    else:
+        return headers.get(language_header, default_code)
 
 
 def load_gettext_translations(directory: str, domain: str) -> None:
