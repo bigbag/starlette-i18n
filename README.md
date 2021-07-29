@@ -28,7 +28,7 @@ from starlette.responses import PlainTextResponse
 from starlette_i18n import (
     DEFAULT_LOCALE,
     LANGUAGE_HEADER,
-    LocaleMiddleware,
+    LocaleFromHeaderMiddleware,
     load_gettext_translations,
 )
 from starlette_i18n import gettext_lazy as _
@@ -42,7 +42,9 @@ def init_app():
 
     app_ = Starlette()
     app_.add_middleware(
-        LocaleMiddleware, language_header=LANGUAGE_HEADER, default_code=DEFAULT_LOCALE
+        LocaleFromHeaderMiddleware, 
+        language_header=LANGUAGE_HEADER, 
+        default_code=DEFAULT_LOCALE
     )
 
     @app_.route("/")
