@@ -19,6 +19,11 @@ class TestLocaleFromHeader:
         assert response.status_code == 200
         assert response.text == "en"
 
+    def test_with_full_header(self, client):
+        response = client.get("/locale/", headers={"Accept-Language": "es-BR,es;q=0.5,ru;q=0.4"})
+        assert response.status_code == 200
+        assert response.text == "ru"
+
 
 class TestLocaleFromCookie:
     def test_success_if_default_locale(self, client):
