@@ -4,7 +4,13 @@ from starlette.middleware import Middleware
 from starlette.responses import HTMLResponse
 from starlette.routing import Route
 
-from starlette_i18n import LocaleMiddleware, get_locale, load_gettext_translations
+from starlette_i18n import (
+    LocaleDefaultMiddleware,
+    LocaleFromCookieMiddleware,
+    LocaleFromHeaderMiddleware,
+    get_locale,
+    load_gettext_translations,
+)
 
 BABEL_DOMAIN = "messages"
 BABEL_LOCALES_PATH = "locales"
@@ -31,7 +37,9 @@ def init_app():
 
     return Starlette(
         middleware=[
-            Middleware(LocaleMiddleware, language_header="Accept-Language", default_code="en"),
+            Middleware(LocaleFromHeaderMiddleware, language_header="Accept-Language"),
+            Middleware(LocaleFromCookieMiddleware, language_cookie="Language"),
+            Middleware(LocaleDefaultMiddleware, default_code="en"),
         ],
         routes=[
             Route("/", mainpage),
