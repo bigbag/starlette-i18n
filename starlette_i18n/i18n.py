@@ -24,7 +24,6 @@ def _make_lazy_gettext(lookup_func: t.Callable) -> t.Callable:
         locale: t.Optional[str] = None,
         **kwargs: t.Any,
     ) -> t.Union[LazyProxy, str]:
-
         if isinstance(string, LazyProxy):
             return string
 
@@ -65,4 +64,4 @@ def get_locale() -> Locale:
 
 
 def get_locale_code() -> str:
-    return str(get_locale())
+    return str(get_locale().language)

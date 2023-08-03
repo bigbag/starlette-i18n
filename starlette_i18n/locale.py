@@ -3,8 +3,9 @@ from __future__ import annotations
 import logging
 import os
 import typing as t
+from dataclasses import dataclass
 
-from babel.core import Locale as _Locale
+from babel.core import Locale as OriginLocale
 from babel.support import NullTranslations, Translations
 
 from . import constants
@@ -13,14 +14,12 @@ logger = logging.getLogger(__name__)
 
 
 class _GettextTranslations:
-    _translations: t.Dict[str, t.Union[Translations, NullTranslations]] = {}
+    _translations: t.Dict[str, NullTranslations] = {}
     _default_locale: str = constants.DEFAULT_LOCALE
     _supported_locales: t.Set[str] = set()
 
     @property
-    def translations(
-        self,
-    ) -> t.Dict[str, t.Union[Translations, NullTranslations]]:
+    def translations(self) -> t.Dict[str, NullTranslations]:
         return self._translations
 
     @property
@@ -39,7 +38,7 @@ class _GettextTranslations:
             try:
                 translation = Translations.load(directory, [lang], domain)
                 if lang in self._translations:
-                    self._translations[lang].merge(translation)
+                    self._translations[lang].merge(translation)  # type: ignore
                 else:
                     self._translations[lang] = translation
             except Exception as e:
@@ -55,16 +54,29 @@ class _GettextTranslations:
 gettext_translations = _GettextTranslations()
 
 
-class Locale(_Locale):
+@dataclass
+class Locale:
+    language: str
+    translations: NullTranslations
+    territory: t.Optional[str] = None
+    script: t.Optional[str] = None
+    variant: t.Optional[str] = None
+    modifier: t.Optional[str] = None
+
     @classmethod
-    def get(cls, code: str) -> Locale:
+    def get(cls, code: str) -> "Locale":
         if code not in gettext_translations.supported_locales:
             code = gettext_translations.default_locale
 
-        translations = gettext_translations.translations.get(code, NullTranslations())
-        locale: Locale = cls.parse(code)
-        locale.translations = translations
-        return locale
+        locale = OriginLocale.parse(code)
+        return cls(
+            language=locale.language,
+            translations=gettext_translations.translations.get(code, NullTranslations()),
+            territory=locale.territory,
+            script=locale.script,
+            variant=locale.variant,
+            modifier=locale.modifier,
+        )
 
     def translate(
         self,
@@ -73,8 +85,7 @@ class Locale(_Locale):
         count: t.Optional[int] = None,
         **kwargs: str,
     ) -> str:
-
-        if plural_message is not None:
+        if plural_message is not None and count is not None:
             message = self.translations.ungettext(message, plural_message, count)
         else:
             message = self.translations.ugettext(message)
