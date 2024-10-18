@@ -10,6 +10,7 @@
 
 **starlette-i18n** is a localisation helper for starlette.
 
+* [Project Changelog](https://github.com/bigbag/starlette-i18n/blob/main/CHANGELOG.md)
 
 ## Installation
 
