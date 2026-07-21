@@ -1,3 +1,0 @@
-jinja2
-starlette-i18n
-uvicorn

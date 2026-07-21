@@ -1,0 +1,12 @@
+msgid ""
+msgstr ""
+"Language: zh_CN\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Success"
+msgstr "成功"
+
+msgid "{count} item"
+msgid_plural "{count} items"
+msgstr[0] "{count} 个项目"
