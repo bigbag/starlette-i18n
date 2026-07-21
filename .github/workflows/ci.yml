@@ -35,4 +35,4 @@ jobs:
       - run: uv sync --all-groups --locked
       - run: uv run --locked pytest --cov=starlette_i18n --cov-report=term-missing
       - if: matrix.python-version == '3.14'
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
