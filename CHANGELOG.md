@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.2.0 (2026-11-15)
+
+* Bump httpx2 from 2.10.0 to 2.12.0 (#21) [dependabot[bot]]
+* Add Python 3.15 support and bump version to 3.2.0 [Pavel Liashkov]
+
+## 3.1.0 (2026-09-27)
+
+* Update changelog [Pavel Liashkov]
+* Fix license [Pavel Liashkov]
+
 ## 3.0.0 (2026-07-21)
 
 * Update changelog [Pavel Liashkov]
